@@ -1,18 +1,21 @@
-import React from "react";
-import App from "./App";
+import React, { Children } from "react";
 
 
 
-function PopupWithForm({name, title}) {
-   
 
-    return (
-        
-        <section className="popup" id={name}>
-        <div className="popup__container">
-          <button className="popup__close" type="button"></button>
-          <h2 className="popup__title">{title}</h2>
-          <form className="popup__content">
+function PopupWithForm({ name, title, children, isOpen, onClose }) {
+
+
+  return (
+
+    <section className={`popup popup_type_${name}`}>
+      <div className="popup__container">
+        <button className="popup__close" type="button"></button>
+        <h2 className="popup__title">{title}</h2>
+      
+
+
+        {/* <form className="popup__content">
             <input 
             type="text" 
             id="name" 
@@ -34,11 +37,12 @@ function PopupWithForm({name, title}) {
             <button className="popup__save" type="submit">
               Сохранить
             </button>
-          </form>
-        </div>
-      </section>
-    
-    )
+          </form>  */}
+
+      </div>
+    </section>
+
+  )
 }
 
 export default PopupWithForm;

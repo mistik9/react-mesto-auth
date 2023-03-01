@@ -3,21 +3,24 @@ import App from "./App";
 import add from '../images/add.svg'
 
 
-function Main({ handleEditAvatarClick, handleEditProfileClick, handleAddPlaceClick }) {
-    function handleEditAvatarClick() {
-        const popupAvatar = document.querySelector('#popup_avatar');
-        popupAvatar.classList.add('.popup_opened');
-        console.log(popupAvatar)
-    };
+function Main() {
+   
     function handleEditProfileClick() {
-        const popupProfile = document.querySelector('#popup_profile');
-        popupProfile.classList.add('.popup_opened');
-    };
-
+        console.log(popupProfile);
+        const popupProfile = document.querySelector('.popup_type_user-info');
+        popupProfile.classlist.add('popup_opened');
+        
+    }
+    function handleEditAvatarClick() {
+        const popupAvatar = document.querySelector('.popup_type_user-avatar');
+        popupAvatar.classlist.add('popup_opened');
+        console.log(popupAvatar);
+    }
     function handleAddPlaceClick() {
-        const popupAdd = document.querySelector('#popup_add');
-        popupAdd.classList.add('.popup_opened');
-    };
+        const popupImage = document.querySelector('.popup_type_add-image');
+        popupImage.classlist.add('popup_opened');
+        console.log(popupImage);
+    }
 
     return (
         <main className="content">
@@ -27,7 +30,7 @@ function Main({ handleEditAvatarClick, handleEditProfileClick, handleAddPlaceCli
                         className="profile__edit-avatar-button"
                         type="button"
                         aria-label="Edit avatar"
-                        onEditAvatar={handleEditAvatarClick}>
+                        onClick={handleEditAvatarClick}>
                     </button>
                 </div>
                 <div className="profile__info">
@@ -36,15 +39,15 @@ function Main({ handleEditAvatarClick, handleEditProfileClick, handleAddPlaceCli
                         className="profile__edit-button"
                         type="button"
                         aria-label="Edit profile"
-                        onEditProfile={handleEditProfileClick}>
+                        onClick={handleEditProfileClick}>
                     </button>
                     <p className="profile__info-about">Исследователь океана</p>
                 </div>
                 <button
                     className="profile__add-button"
                     type="button"
-                    onAddPlace={handleAddPlaceClick}>
-                    <img src={add} alt="кнопка добавить"/></button>
+                    onClick={handleAddPlaceClick}>
+                    <img src={add} alt="кнопка добавить" /></button>
             </section>
             <section className="elements">
                 <ul className="elements__container">
