@@ -3,19 +3,20 @@ import React, { Children } from "react";
 
 
 
-function PopupWithForm({ name, title, children, isOpen, onClose }) {
+function PopupWithForm({ name, title, children, isOpen, onClose, onEditProfile, onAddPlace, onEditAvatar  }) {
 
 
   return (
 
-    <section className={`popup popup_type_${name}`}>
+    <section className={`popup popup_type_${name} ${isOpen ? 'popup_opened' : ''}`}>
       <div className="popup__container">
-        <button className="popup__close" type="button"></button>
-        <h2 className="popup__title">{title}</h2>
-      
+        <form className="popup__content" name={name}>
+          <button className="popup__close" type="button" onClick = {onclose}></button>
+          <h2 className="popup__title">{title}</h2>
+          {children}
+        </form>
 
-
-        {/* <form className="popup__content">
+        {/* 
             <input 
             type="text" 
             id="name" 
@@ -37,7 +38,7 @@ function PopupWithForm({ name, title, children, isOpen, onClose }) {
             <button className="popup__save" type="submit">
               Сохранить
             </button>
-          </form>  */}
+            */}
 
       </div>
     </section>

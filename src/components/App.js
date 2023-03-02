@@ -1,5 +1,5 @@
 
-
+import React from 'react';
 import '../index.css';
 import Header from './Header.js'
 import Main from './Main.js'
@@ -7,38 +7,57 @@ import Footer from './Footer.js'
 import PopupWithForm from './PopupWithForm.js'
 import PopupImage from './PopupImage';
 
-function App() {
 
+function App() {
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false)
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false)
+
+
+  const handleEditProfileClick = () => {
+    setIsEditProfilePopupOpen(true)
+  }
+  const handleAddPlaceClick = () => {
+    setIsAddPlacePopupOpen(true)
+  }
+  const handleEditAvatarClick = () => {
+    setIsEditAvatarPopupOpen(true)
+  }
 
 const closeAllPopups =() => {
-document.classlist.remove('popup_opened')
+    setIsEditProfilePopupOpen(false)
+  setIsAddPlacePopupOpen(false)
+  setIsEditAvatarPopupOpen(false)
 }
 
   return (
     <div className="app">
       <Header />
       <Main
-        // onEditProfile={handleEditProfileClick}
-        // onAddPlace={handleAddPlaceClick}
-        // onEditAvatar={handleEditAvatarClick}
+        onEditProfile={handleEditProfileClick}
+        onAddPlace={handleAddPlaceClick}
+        onEditAvatar={handleEditAvatarClick}
         // onCardClick={handleCardClick}
       />
-      {/* <PopupWithForm
+       <PopupWithForm
       name={'user-avatar'}
       title={'Редактировать аватар'}
-
+      isOpen={isEditAvatarPopupOpen}
+      onclose ={closeAllPopups}
           />
     <PopupWithForm
       name={'user-info'}
       title={'Редактировать профиль'}
-
+      isOpen={isEditProfilePopupOpen}
+      onclose ={closeAllPopups}
           />
             <PopupWithForm
       name={'user-image'}
       title={'Новое место'}
-
-          /> */}
-          <div>
+      isOpen={isAddPlacePopupOpen}
+      onclose ={closeAllPopups}
+          /> 
+          {/* <div>
           <section className="popup popup_type_user-info" >
     <div className="popup__container">
       <button className="popup__close" type="button"></button>
@@ -102,22 +121,10 @@ document.classlist.remove('popup_opened')
       </form>
     </div>
   </section>
-  </div>
+  </div> */}
     
       <Footer />
-      <template id="element-template">
-        <li className="element">
-          <button className="element__delete" type="button"></button>
-          <img className="element__image" src="src" alt="alt" />
-          <div className="element__bottom">
-            <p className="element__bottom-title"></p>
-            <div className="element__bottom-like-container">
-              <button className="element__bottom-like" type="button"></button>
-              <span className="element__bottom-like-counter"></span>
-            </div>
-          </div>
-        </li>
-      </template>
+
     </div>
   );
 }
