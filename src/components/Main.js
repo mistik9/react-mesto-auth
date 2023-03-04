@@ -5,9 +5,9 @@ import Card from "./Card";
 
 
 function Main({ onEditProfile, onAddPlace, onEditAvatar, card, onCardClick }) {
-    const [userName, setUserName] = React.useState();
-    const [userDescription, setUserDescription] = React.useState();
-    const [userAvatar, setUserAvatar] = React.useState();
+    const [userName, setUserName] = React.useState('Пирожок');
+    const [userDescription, setUserDescription] = React.useState('кот');
+    const [userAvatar, setUserAvatar] = React.useState('https://i.pinimg.com/originals/a5/f9/33/a5f93373026b27dcc40c53d8bdb148c9.png');
     const [cards, setCards] = React.useState([]);
 
     React.useEffect(() => {
@@ -75,7 +75,6 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, card, onCardClick }) {
                     {cards.map((card) => {
                         return (
                             <Card
-                                key={card._id}
                                 card={card}
                                 src={card.link}
                                 title={card.name}
