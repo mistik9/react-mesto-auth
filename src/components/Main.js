@@ -1,11 +1,10 @@
 import React from "react";
-import App from "./App";
 import add from '../images/add.svg'
 import api from '../utils/api.js'
 import Card from "./Card";
 
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, card }) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, card, onCardClick }) {
     const [userName, setUserName] = React.useState();
     const [userDescription, setUserDescription] = React.useState();
     const [userAvatar, setUserAvatar] = React.useState();
@@ -22,7 +21,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, card }) {
                 setUserAvatar(userAvatar);
             })
             .catch((err) => {
-                console.log("Ошибочка")
+                console.log("Ошибочкa с юзером")
             })
     }, [])
 
@@ -40,7 +39,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, card }) {
                 setCards(cards)
             })
             .catch((err) => {
-                console.log("Ошибочка")
+                console.log("Ошибочка с карточками")
             })
     }, [])
 
@@ -73,8 +72,17 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, card }) {
             </section>
             <section className="elements">
                 <ul className="elements__container">
-                    {cards.map((card) =>{<Card key={card._id} card={card} />
+                    {cards.map((card) => {
+                        return (
+                            <Card
+                                key={card._id}
+                                card={card}
+                                src={card.link}
+                                title={card.name}
+                                like={card.likes}
+                                onCardClick={onCardClick} />
 
+                        )
                     })}
                 </ul>
             </section>
