@@ -5,10 +5,9 @@ import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, card, onCardClick }) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, card, onCardClick, onDeleteClick, onCardLike }) {
 
     const [cards, setCards] = React.useState([]);
-
     const currentUser = React.useContext(CurrentUserContext);
 
 
@@ -16,12 +15,14 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, card, onCardClick }) {
     React.useEffect(() => {
         api.getInitialCards()
             .then(res => {
+
                 const cards = res.map(item => {
                     return {
                         name: item.name,
                         link: item.link,
-                        likes: item.likes.length,
-                        id: item._id
+                        likes: item.likes,
+                        id: item._id,
+                        owner: item.owner._id
                     }
                 })
                 setCards(cards)
@@ -67,13 +68,19 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, card, onCardClick }) {
                                 src={card.link}
                                 title={card.name}
                                 like={card.likes}
-                                onCardClick={onCardClick} />
-
+                                owner={card.owner}
+                                onCardClick={onCardClick}
+                                onDeleteClick={onDeleteClick}
+                                onCardLike={onCardLike}
+                                 />
+    
                         )
+
                     }
+                
                 </ul>
             </section>
-
+    
         </main>
 
     )
