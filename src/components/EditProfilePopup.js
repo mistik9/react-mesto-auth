@@ -8,37 +8,43 @@ import api from '../utils/api';
 function EditProfilePopup(isOpen, onClose, onUpdateUser) {
     const currentUser = React.useContext(CurrentUserContext);
     const [name, setName] = React.useState(currentUser.name);
-    const [description, setDescription] = React.useState(currentUser.about);
+    const [about, setAbout] = React.useState(currentUser.about);
 
 
     React.useEffect(() => {
         setName(currentUser.name);
-        setDescription(currentUser.about);
+        setAbout(currentUser.about);
     }, [currentUser]);
 
     function handleSubmit(e) {
         e.preventDefault();
         onUpdateUser({
             name,
-            about:description,
+            about,
         });
         
     }
+    function handleChangeName(e) {
+        setName(e.target.value);
+      }
+      function handleChangeAbout(e) {
+        setAbout(e.target.value);
+      }
    
 
     return (
         <PopupWithForm
-            name={'user-info'}
-            title={'Редактировать профиль'}
+            name='user-info'
+            title='Редактировать профиль'
             isOpen={isOpen}
             onClose={onClose}
             onSubmit={handleSubmit}
         >
             <input type="text" id="name" placeholder="Имя" className="popup__input popup__input_type_name" required
-                minLength="2" maxLength="40" /> {name}
+                minLength="2" maxLength="40" value={currentUser.name} onChange={handleChangeName}/> 
             <span id="name-error" class="error"></span>
             <input type="text" id="about" placeholder="Работа" className="popup__input popup__input_type_about" required
-                minLength="2" maxLength="200" /> {description}
+                minLength="2" maxLength="200" value={currentUser.about} onChange={handleChangeAbout}/> 
             <span id="about-error" class="error"></span>
         </PopupWithForm>
     )

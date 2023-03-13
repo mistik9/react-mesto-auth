@@ -76,14 +76,18 @@ function App() {
       .catch((err) => console.log("не удалилась"));
   }
 
-  function handleUpdateUser() {
-    api.updateUserData()
-    .then((res) => {
-      console.log(res)
+  function handleUpdateUser({name, about}) {
+    console.log(12)
+    api.updateUserData({
+      name: name,
+      about: about,
+  })
+      .then(res => {
+        console.log(res)
         setCurrentUser(res);
       })
       .catch((err) => console.log("пользователь не обновился"));
-}
+  }
 
 
 
@@ -111,7 +115,7 @@ function App() {
           <span id="avatar-error" class="error"></span>
         </PopupWithForm>
 
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
+        <EditProfilePopup isOpen={!isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
 
         <PopupWithForm
           name={'user-image'}
@@ -127,10 +131,7 @@ function App() {
           <span id="link-error" class="error"></span>
         </PopupWithForm>
 
-        <ImagePopup
-          card={selectedCard}
-          onclose={closeAllPopups}
-        />
+        <ImagePopup card={selectedCard} onclose={closeAllPopups}/>
       </CurrentUserContext.Provider>
     </div>
   );
