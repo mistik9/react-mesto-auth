@@ -5,33 +5,11 @@ import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, card, onCardClick, onDeleteClick, onCardLike }) {
-
-    const [cards, setCards] = React.useState([]);
+function Main({ onEditProfile, onAddPlace, onEditAvatar, cards, onCardClick, onDeleteClick, onCardLike }) {
     const currentUser = React.useContext(CurrentUserContext);
+    console.log(cards)
 
-
-
-    React.useEffect(() => {
-        api.getInitialCards()
-            .then(res => {
-
-                const cards = res.map(item => {
-                    return {
-                        name: item.name,
-                        link: item.link,
-                        likes: item.likes,
-                        id: item._id,
-                        owner: item.owner._id
-                    }
-                })
-                setCards(cards)
-            })
-            .catch((err) => {
-                console.log("Ошибочка с карточками")
-            })
-    }, [])
-
+   
     return (
         <main className="content">
             <section className="profile">
