@@ -73,11 +73,12 @@ function App() {
 
   const handleCardLike = (card) => {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-       api.doLike(card.id, !isLiked)
-      .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-      })
-      .catch((err) => console.log("не лайкнулась"));
+    (isLiked? api.doLike(card.id, !isLiked) : api.doDislike(card.id))
+.then((newCard) => {
+      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    })
+    .catch((err) => console.log("не лайкнулась"));
+      
   }
   const handleDeleteClick = (card) => {
     const isOwn = card.owner === currentUser._id;
