@@ -86,8 +86,6 @@ class Api {
     }
 
     addNewCard(data) {
-        
-        
         return fetch(`${this._baseUrl}/cards`, {
             method: 'POST',
             headers: {
@@ -168,11 +166,11 @@ class Api {
 
 
 
- const api = new Api({
+const api = new Api({
     baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-59',
     headers: {
         authorization: 'e1a3eb7f-14f7-4ac0-a07c-6d12f2e5fdaa',
         'Content-Type': 'application/json'
     }
-}); 
+});
 export default api;
