@@ -32,10 +32,10 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
     >
       <input type="text" id="pic" placeholder="Название" className="popup__input popup__input_type_place"
         minLength="2" maxLength="30" value={name} onChange={handleChangeName} />
-      <span id="pic-error" class="error"></span>
+      <span id="pic-error" className="error"></span>
       <input type="url" id="link" placeholder="Ссылка на картинку" className="popup__input popup__input_type_url"
         value={link} onChange={handleChangeLink} />
-      <span id="link-error" class="error"></span>
+      <span id="link-error" className="error"></span>
     </PopupWithForm>
   )
 }
