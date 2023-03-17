@@ -17,6 +17,7 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState(null)
   const [cards, setCards] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({})
+
  
   React.useEffect(() => {
     api.getUserData()
@@ -62,6 +63,7 @@ function App() {
             id: item._id,
             owner: item.owner._id
           }
+          (cards)
         })
         setCards(cards)
       })
@@ -73,10 +75,16 @@ function App() {
 
   const handleCardLike = (card) => {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-    (isLiked? api.doLike(card.id, !isLiked) : api.doDislike(card.id))
+    
+    (isLiked ? api.doDislike(card.id) : api.doLike(card.id))
 .then((newCard) => {
-      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    })
+      setCards((state) => 
+      state.map((c) => (c.id === card.id ? newCard : c))
+
+    )
+    
+})
+
     .catch((err) => console.log("не лайкнулась"));
       
   }
@@ -91,10 +99,10 @@ function App() {
   }
 
   function handleUpdateUser(data) {
-    console.log(12)
+  
     api.updateUserData(data)
       .then(res => {
-        console.log(res)
+    
         setCurrentUser(res);
         closeAllPopups()
       })
@@ -112,9 +120,9 @@ function App() {
   }
 
   function handleAddPlace(data) {
-    api.addNewCard(data)
+    api.addNewCard(setCards)
     .then((card) => {
-      console.log(card)  
+  
       setCards([card, ...card])
     })
     .catch((err) => console.log("карточка не добавлена"));

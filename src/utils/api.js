@@ -86,6 +86,8 @@ class Api {
     }
 
     addNewCard(data) {
+        
+        
         return fetch(`${this._baseUrl}/cards`, {
             method: 'POST',
             headers: {
@@ -93,7 +95,7 @@ class Api {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name: data.pic,
+                name: data.name,
                 link: data.link
             })
         })

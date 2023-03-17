@@ -2,15 +2,16 @@ import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
 
-function AddPlacePopup (isOpen, onClose, onAddPlace) {
+function AddPlacePopup ({isOpen, onClose, onAddPlace}) {
   const [name, setName] = React.useState();
   const [link, setLink] = React.useState();
+  
 
         function handleSubmit(e) {
         e.preventDefault();
             onAddPlace({
-              name:name,
-              link:link
+              name,
+              link
             });
       } 
 
@@ -29,11 +30,11 @@ function AddPlacePopup (isOpen, onClose, onAddPlace) {
         onClose={onClose}
         onSubmit={handleSubmit}
       >
-        <input type="text" id="pic" placeholder="Название" className="popup__input popup__input_type_place" required
+        <input type="text" id="pic" placeholder="Название" className="popup__input popup__input_type_place" 
           minLength="2" maxLength="30" onChange={handleChangeName}/>
         <span id="pic-error" class="error"></span>
         <input type="url" id="link" placeholder="Ссылка на картинку" className="popup__input popup__input_type_url"
-          required onChange={handleChangeLink}/>
+           onChange={handleChangeLink}/>
         <span id="link-error" class="error"></span>
       </PopupWithForm>
     )

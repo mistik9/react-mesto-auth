@@ -49,7 +49,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, cards, onCardClick, onD
                                 onDeleteClick={onDeleteClick}
                                 onCardLike={onCardLike}
                                  />
-    
+  
                         )
 
                     }
