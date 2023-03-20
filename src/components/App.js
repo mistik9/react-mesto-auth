@@ -84,10 +84,10 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    api.deleteCard(card.id)
+    api.deleteCard(card._id)
       .then((res) => {
-        const newCard = cards.filter((item) => item._id !== card._id);
-        console.log(setCards)
+         const newCard = cards.filter((item) => item._id !== card._id);
+        console.log(newCard)
         setCards(newCard);
       })
       .catch((err) => console.log("не удалилась"));
