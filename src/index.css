@@ -55,6 +55,7 @@
 @import url(./blocks/element/__bottom-like-counter/element__bottom-like-counter.css);
 @import url(./blocks/element/__bottom-like/__bottom-like_active/element__bottom-like\ _active.css);
 @import url(./blocks/element/__delete/element__delete.css);
+@import url(./blocks/element/__delete/_hidden/element__delete_hidden.css);
 
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/footer/__copyright/footer__copyright.css);

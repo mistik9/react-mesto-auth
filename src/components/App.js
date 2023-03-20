@@ -74,10 +74,10 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-    (isLiked ? api.doDislike(card.id) : api.doLike(card.id))
+    (isLiked ? api.doDislike(card._id) : api.doLike(card._id))
       .then((newCard) => {
         setCards((state) =>
-          state.map((c) => (c.id === card.id ? newCard : c))
+          state.map((c) => (c._id === card._id ? newCard : c))
         )
       })
       .catch((err) => console.log("не лайкнулась"));
