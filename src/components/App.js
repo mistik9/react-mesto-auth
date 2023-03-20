@@ -20,14 +20,35 @@ function App() {
 
 
   React.useEffect(() => {
-    api.getUserData()
-      .then(res => {
-        setCurrentUser(res)
+    Promise.all([api.getUserData(),api.getInitialCards()])
+       .then(([userData, cardsData]) => {
+        setCurrentUser(userData)
+        setCards(cardsData)
       })
       .catch((err) => {
-        console.log("Ошибочкa с юзером")
+        console.log("Ошибочкa с загрузкой")
       })
   }, [])
+
+  // React.useEffect(() => {
+  //   api.getInitialCards()
+  //     .then(res => {
+
+  //       const cards = res.map(item => {
+  //         return {
+  //           name: item.name,
+  //           link: item.link,
+  //           likes: item.likes,
+  //           id: item._id,
+  //           owner: item.owner._id
+  //         }
+  //       })
+  //       setCards(cards)
+  //     })
+  //     .catch((err) => {
+  //       console.log("Ошибочка с карточками")
+  //     })
+  // }, [])
 
 
   function handleEditProfileClick() {
@@ -51,27 +72,6 @@ function App() {
     setSelectedCard(null)
   }
 
-  React.useEffect(() => {
-    api.getInitialCards()
-      .then(res => {
-
-        const cards = res.map(item => {
-          return {
-            name: item.name,
-            link: item.link,
-            likes: item.likes,
-            id: item._id,
-            owner: item.owner._id
-          }
-        })
-        setCards(cards)
-      })
-      .catch((err) => {
-        console.log("Ошибочка с карточками")
-      })
-  }, [])
-
-
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     (isLiked ? api.doDislike(card.id) : api.doLike(card.id))
@@ -87,6 +87,7 @@ function App() {
     api.deleteCard(card.id)
       .then((res) => {
         const newCard = cards.filter((item) => item._id !== card._id);
+        console.log(setCards)
         setCards(newCard);
       })
       .catch((err) => console.log("не удалилась"));

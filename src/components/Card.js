@@ -10,6 +10,8 @@ function Card({ card, onCardClick, onDeleteClick, onCardLike }) {
   );
   const cardDeleteButtonClassName = (isOwn ? 'element__delete' : '')
 
+
+
   function handleClick() {
     onCardClick(card);
   }
@@ -18,6 +20,7 @@ function Card({ card, onCardClick, onDeleteClick, onCardLike }) {
   }
   function handleLikeClick() {
     onCardLike(card)
+    console.log(card)
   }
 
 
