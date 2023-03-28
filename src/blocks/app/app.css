@@ -1,12 +1,13 @@
 .app {
   background-color: #000000;
   min-width: 320px;
+  min-height: 100vh;
   color: white;
   padding: 45px 200px 60px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  box-sizing: borderbox;
+  box-sizing: border-box;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
@@ -14,8 +15,8 @@
 }
 
 @media screen and (max-width: 800px) {
-  .page {
-    padding: 28px 19px 36px;
+  .app {
+    padding: 28px 30px 40px 30px;
     margin: 0;
   }
 }

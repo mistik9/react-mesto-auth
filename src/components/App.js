@@ -13,6 +13,7 @@ import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import ProtectedRoute from "./ProtectedRoute";
 import Register from './Register.js';
 import Login from './Login.js';
+import auth from '../utils/auth.js';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
@@ -27,55 +28,55 @@ function App() {
 
   const navigate = useNavigate()
 
-  function cbLogin({ username, password }) {
-    api.authorize(username, password)
-      .then((res) => {
-        console.log(res)
-        setLoggedIn(true)
-        setUserData(res.user)
-      })
-      .catch((err) => console.log("Ошибка"))
-      .finally(
-        setLoading(false)
-      )
-  }
+  // function cbLogin({ username, password }) {
+  //   auth.authorize(username, password)
+  //     .then((res) => {
+  //       console.log(res)
+  //       setLoggedIn(true)
+  //       setUserData(res.user)
+  //     })
+  //     .catch((err) => console.log("Ошибка"))
+  //     .finally(
+  //       setLoading(false)
+  //     )
+  // }
 
-  function cbRegister({ username, password, email }) {
-    api.register(username, password, email)
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => console.log("Ошибка"));
-  }
+  // function cbRegister({ username, password, email }) {
+  //   auth.register(username, password, email)
+  //     .then((res) => {
+  //       console.log(res)
+  //     })
+  //     .catch((err) => console.log("Ошибка"));
+  // }
 
-  function cbTokenCheck() {
-    if (localStorage.getItem('jwt')) {
-      const jwt = localStorage.getItem('jwt');
-      api.checkToken(jwt).then((res) => {
-        if (res) {
-          setLoggedIn(true);
-          navigate('/main', { replace: true })
-        }
-      })
-    }
-  }
+  // function cbTokenCheck() {
+  //   if (localStorage.getItem('jwt')) {
+  //     const jwt = localStorage.getItem('jwt');
+  //     auth.checkToken(jwt).then((res) => {
+  //       if (res) {
+  //         setLoggedIn(true);
+  //         navigate('/main', { replace: true })
+  //       }
+  //     })
+  //   }
+  // }
 
-  function cbLogOut() {
-    setLoggedIn(false);
-    setUserData({});
-    localStorage.removeItem('jwt')
-  }
+  // function cbLogOut() {
+  //   setLoggedIn(false);
+  //   setUserData({});
+  //   localStorage.removeItem('jwt')
+  // }
 
-  React.useEffect(() => {
-    Promise.all([api.getUserData(), api.getInitialCards()])
-      .then(([userData, cardsData]) => {
-        setCurrentUser(userData)
-        setCards(cardsData)
-      })
-      .catch((err) => {
-        console.log("Ошибочкa с загрузкой")
-      })
-  }, [])
+  // React.useEffect(() => {
+  //   Promise.all([api.getUserData(), api.getInitialCards()])
+  //     .then(([userData, cardsData]) => {
+  //       setCurrentUser(userData)
+  //       setCards(cardsData)
+  //     })
+  //     .catch((err) => {
+  //       console.log("Ошибочкa с загрузкой")
+  //     })
+  // }, [])
 
 
   function handleEditProfileClick() {
@@ -157,7 +158,6 @@ function App() {
 
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
-        <Header />
         <Routes>
           <Route path="/sign-in" element={<Login />} />
           <Route path="/sign-up" element={<Register />} />
