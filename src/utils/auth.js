@@ -1,75 +1,59 @@
-// class Auth {
-//     constructor(options) {
-//         this._baseUrl = options.baseUrl;
+class Auth {
+    constructor(options) {
+        this._baseUrl = options.baseUrl;
 
-//     }
+    }
 
-// register({ username, password, email }) {
-//     return fetch(`${this._baseUrl}/auth/local/register/`, {
-//         method: 'POST',
-//         headers: {
-//             'Accept': 'application/json',
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({ username, password, email })
-//     })
-//         .then(res => {
-//             if (res.ok) {
-//                 return res.json();
-//             }
-//             return Promise.reject(`Ошибка: ${res.status}`);
-//         })
-//         .then((res) => {
-//             return res
-//         })
-//         .catch((err) => {
-//             console.log(err);
-//         })
-// }
+    register({ email, password }) {
+        return fetch(`${this._baseUrl}/signup`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        })
+            .then(res => {
+                return res.json();
+                console.log(res)
+            })
 
-// authorize({ identifier, password }) {
-//     return fetch(`${this._baseUrl}/auth/local/`, {
-//         method: 'POST',
-//         headers: {
-//             'Accept': 'application/json',
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({ identifier, password })
-//     })
-//         .then(res => {
-//             return res.json();
-//         })
-//         .then((data) => {
-//             if (data.user) {
-//                 localStorage.setItem('jwt', data.jwt)
-//                 return data;
-//             } else {
+            .then((res) => {
+                return res
 
-//             }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
 
-//         })
-//         .catch((err) => {
-//             console.log(err);
-//         })
-// }
-// checkToken (token) {
-//     return fetch(`${this._baseUrl}/users/me/`, {
-//         method: 'GET',
-//         headers: {
-//             'Accept': 'application/json',
-//             'Content-Type': 'application/json',
-//             'Authorization': `Bearer ${token}`,
-//         }
-//     })
-//         .then(res => res.json())
-//         .then(data => data)
-// }
-// }
-// const auth = new Auth({
-//     baseUrl: 'https://auth.nomoreparties.co',
-//     headers: {
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json'
-//     }
-// });
-// export default auth;
+    authorize(email, password) {
+        return fetch(`${this._baseUrl}/signin`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        })
+            .then(res => {
+                if (res.ok) return res.json();
+            })
+         
+    }
+    checkToken(token) {
+        return fetch(`${this._baseUrl}/users/me/`, {
+            method: 'GET',
+            headers: {
+
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            }
+        })
+            .then(res => res.json())
+            .then(data => data)
+    }
+}
+const auth = new Auth({
+    baseUrl: 'https://auth.nomoreparties.co',
+
+});
+export default auth;

@@ -4,11 +4,13 @@
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
-    color: #FFFFFF;
-    text-align: right;
+    color: #A9A9A9;
     text-decoration: none;
+    margin: 0;
 
 }
+
+
 
 @media screen and (max-width: 800px) {
     .header__menu-item {

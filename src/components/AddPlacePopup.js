@@ -1,10 +1,10 @@
-import React from 'react';
-import PopupWithForm from './PopupWithForm';
+import React from "react";
+import PopupWithForm from "./PopupWithForm";
 
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
-  const [name, setName] = React.useState('');
-  const [link, setLink] = React.useState('');
+  const [name, setName] = React.useState("");
+  const [link, setLink] = React.useState("");
 
 
   function handleSubmit(e) {
@@ -24,8 +24,8 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
 
   return (
     <PopupWithForm
-      name={'user-image'}
-      title={'Новое место'}
+      name={"user-image"}
+      title={"Новое место"}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
