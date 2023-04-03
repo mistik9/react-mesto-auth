@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Header from "./Header";
 
 function Register({ onRegister }) {
     const [email, setEmail] = React.useState("");
@@ -20,7 +21,9 @@ function Register({ onRegister }) {
 
     return (
         <div>
-            <Link to={"/sign-in"} className="header__menu-item">Войти</Link>
+            <Header>
+            <Link to="/sign-in" className="header__menu-item">Войти</Link>
+            </Header>
             <div className="login content">
                 <h2 className="login__title">Регистрация</h2>
                 <form className="login__content" onSubmit={handleSubmit} >

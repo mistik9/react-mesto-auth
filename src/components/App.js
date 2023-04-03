@@ -24,7 +24,7 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [email, setEmail] = React.useState({});
+  const [email, setEmail] = React.useState("");
   const [userData, setUserData] = React.useState({});
   const [infoMessage, setInfoMessage] = React.useState({ isSuccess: false, message: "" })
 
@@ -34,8 +34,8 @@ function App() {
     handleTokenCheck();
   }, [])
 
+
   React.useEffect(() => {
-    if (loggedIn) {
       Promise.all([api.getUserData(), api.getInitialCards()])
         .then(([userData, cardsData]) => {
           setCurrentUser(userData)
@@ -44,7 +44,7 @@ function App() {
         .catch((err) => {
           console.log("Ошибочкa с загрузкой")
         })
-    }
+
   }, [])
 
   //авторизация
@@ -65,6 +65,7 @@ function App() {
         if (!res.error) {
           setIsInfoTooltipOpen(true)
           setInfoMessage({ isSuccess: true, message: "Вы успешно зарегистрировались!" })
+          setLoggedIn(true)
           navigate("/", { replace: true });
         } else {
           setIsInfoTooltipOpen(true)
@@ -196,8 +197,6 @@ function App() {
               onCardLike={handleCardLike}
               onDeleteClick={handleCardDelete}
               cards={cards}
-              email={email}
-              loggedIn={loggedIn}
             />
           </ProtectedRoute>
           }

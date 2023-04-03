@@ -14,7 +14,7 @@
   text-rendering: optimizeLegibility;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 736px) {
   .app {
     padding: 28px 30px 40px 30px;
     margin: 0;

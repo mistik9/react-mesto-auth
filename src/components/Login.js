@@ -1,13 +1,14 @@
 
 import React from "react";
 import Header from "./Header";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 
 
 
-function Login({onLogin}) {
+function Login({ onLogin }) {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -23,8 +24,10 @@ function Login({onLogin}) {
 
     return (
         <div>
-    <Link to={"/sign-up"} className="header__menu-item">Регистрация</Link>
-            <div className="login">
+            <Header>
+                <Link to="/sign-up" className="header__menu-item">Регистрация</Link>
+            </Header>
+            <div className="login content">
                 <h2 className="login__title">Вход</h2>
                 <form className="login__content" onSubmit={handleSubmit} >
                     <input type="text" id="email" placeholder="Email" className="login__input login__input_type_email" required
@@ -35,9 +38,8 @@ function Login({onLogin}) {
                     <span id="about-error" className="error"></span>
                     <button className="login__save" type="submit">Войти</button>
                 </form>
-
             </div>
-        </div >
+        </div>
     )
 }
 export default Login;
