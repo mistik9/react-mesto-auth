@@ -30,7 +30,7 @@ function Register({ onRegister }) {
                     <input type="text" id="email" placeholder="Email" className="login__input login__input_type_email" required
                         minLength="2" maxLength="40" value={email} onChange={handleChangeEmail} />
                     <span id="name-error" className="error"></span>
-                    <input type="password " id="password " placeholder="Пароль" className="login__input login__input_type_password" required
+                    <input type="password" id="password " placeholder="Пароль" className="login__input login__input_type_password" required
                         minLength="2" maxLength="200" value={password} onChange={handleChangePassword} />
                     <span id="about-error" className="error"></span>
                     <button className="login__save" type="submit">Зарегистрироваться</button>

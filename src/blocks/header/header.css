@@ -3,7 +3,7 @@
   max-width: 880px;
   margin: 0;
   display: grid;
-  grid-template-columns: auto min-content min-content min-content;
+  grid-template-columns: 1fr auto auto;
 
 }
 

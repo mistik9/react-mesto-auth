@@ -1,5 +1,3 @@
-
-
 class Api {
     constructor(options) {
         this._baseUrl = options.baseUrl;
@@ -18,9 +16,7 @@ class Api {
                 }
                 return Promise.reject(`Ошибка: ${res.status}`);
             })
-            .catch((err) => {
-                console.log(err);
-            })
+
     }
 
     getUserData() {
@@ -35,9 +31,7 @@ class Api {
                 }
                 return Promise.reject(`Ошибка: ${res.status}`);
             })
-            .catch((err) => {
-                console.log(err);
-            })
+
     }
 
     updateUserData(data) {
@@ -58,9 +52,7 @@ class Api {
                 }
                 return Promise.reject(`Ошибка: ${res.status}`);
             })
-            .catch((err) => {
-                console.log(err);
-            })
+
     }
 
     updateAvatar(data) {
@@ -80,9 +72,7 @@ class Api {
                 }
                 return Promise.reject(`Ошибка: ${res.status}`);
             })
-            .catch((err) => {
-                console.log(err);
-            })
+
     }
 
     addNewCard(data) {
@@ -103,9 +93,7 @@ class Api {
                 }
                 return Promise.reject(`Ошибка: ${res.status}`);
             })
-            .catch((err) => {
-                console.log(err);
-            })
+
     }
 
     doLike(_id) {
@@ -121,9 +109,7 @@ class Api {
                 }
                 return Promise.reject(`Ошибка: ${res.status}`);
             })
-            .catch((err) => {
-                console.log(err);
-            })
+
     }
 
     doDislike(_id) {
@@ -139,9 +125,7 @@ class Api {
                 }
                 return Promise.reject(`Ошибка: ${res.status}`);
             })
-            .catch((err) => {
-                console.log(err);
-            })
+
     }
 
     deleteCard(_id) {
@@ -156,9 +140,6 @@ class Api {
                     return res.json();
                 }
                 return Promise.reject(`Ошибка: ${res.status}`);
-            })
-            .catch((err) => {
-                console.log(err);
             })
     }
 

@@ -34,8 +34,9 @@ function App() {
     handleTokenCheck();
   }, [])
 
-
   React.useEffect(() => {
+    console.log()
+    if (!loggedIn) {
       Promise.all([api.getUserData(), api.getInitialCards()])
         .then(([userData, cardsData]) => {
           setCurrentUser(userData)
@@ -44,17 +45,25 @@ function App() {
         .catch((err) => {
           console.log("Ошибочкa с загрузкой")
         })
-
+    }
   }, [])
+
+
 
   //авторизация
   function handleLogin({ email, password }) {
     auth.authorize(email, password)
       .then((res) => {
         if (res.token) localStorage.setItem("token", res.token);
-        setLoggedIn(true)
+        setLoggedIn(true);
         navigate("/", { replace: true });
-        setUserData(res.user)
+        setUserData(res.user);
+        setEmail(email);
+      })
+      .catch((err) => {
+        setIsInfoTooltipOpen(true)
+        setInfoMessage({ isSuccess: false, message: "Что-то пошло не так! Попробуйте ещё раз." })
+        console.log("Ошибка авторизации")
       })
   }
 
@@ -62,17 +71,17 @@ function App() {
   function handleRegister({ email, password }) {
     auth.register({ email, password })
       .then((res) => {
-        if (!res.error) {
+        if (!res.error)
           setIsInfoTooltipOpen(true)
-          setInfoMessage({ isSuccess: true, message: "Вы успешно зарегистрировались!" })
-          setLoggedIn(true)
-          navigate("/", { replace: true });
-        } else {
-          setIsInfoTooltipOpen(true)
-          setInfoMessage({ isSuccess: false, message: "Что-то пошло не так! Попробуйте ещё раз." })
-        }
-      }).catch((err) => {
-        console.log("Ошибка")
+        setInfoMessage({ isSuccess: true, message: "Вы успешно зарегистрировались!" })
+        setLoggedIn(true)
+        navigate("/", { replace: true });
+        setEmail(email);
+      })
+      .catch((err) => {
+        setIsInfoTooltipOpen(true)
+        setInfoMessage({ isSuccess: false, message: "Что-то пошло не так! Попробуйте ещё раз." })
+        console.log("Ошибка регистрации")
       })
   }
 
@@ -85,13 +94,17 @@ function App() {
   function handleTokenCheck() {
     if (localStorage.getItem("token")) {
       const jwt = localStorage.getItem("token");
-      auth.checkToken(jwt).then((res) => {
-        if (res) {
-          setEmail(res.data.email)
-          setLoggedIn(true);
-          navigate("/", { replace: true })
-        }
-      })
+      auth.checkToken(jwt)
+        .then((res) => {
+          if (res) {
+            setEmail(res.data.email)
+            setLoggedIn(true);
+            navigate("/", { replace: true })
+          }
+        })
+        .catch((err) => {
+          console.log("Ошибка токена")
+        })
     }
   }
 

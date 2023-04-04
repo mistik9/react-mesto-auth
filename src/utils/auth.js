@@ -13,17 +13,9 @@ class Auth {
             body: JSON.stringify({ email, password })
         })
             .then(res => {
-                return res.json();
-                console.log(res)
+                if (res.ok) return res.json();
             })
 
-            .then((res) => {
-                return res
-
-            })
-            .catch((err) => {
-                console.log(err);
-            })
     }
 
     authorize(email, password) {
@@ -37,7 +29,7 @@ class Auth {
             .then(res => {
                 if (res.ok) return res.json();
             })
-         
+
     }
     checkToken(token) {
         return fetch(`${this._baseUrl}/users/me/`, {
@@ -48,7 +40,9 @@ class Auth {
                 'Authorization': `Bearer ${token}`,
             }
         })
-            .then(res => res.json())
+            .then(res => {
+                if (res.ok) return res.json();
+            })
             .then(data => data)
     }
 }
