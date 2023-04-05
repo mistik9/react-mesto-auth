@@ -1,7 +1,6 @@
 class Auth {
     constructor(options) {
         this._baseUrl = options.baseUrl;
-
     }
 
     register({ email, password }) {
@@ -35,7 +34,6 @@ class Auth {
         return fetch(`${this._baseUrl}/users/me/`, {
             method: 'GET',
             headers: {
-
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
             }
@@ -43,9 +41,9 @@ class Auth {
             .then(res => {
                 if (res.ok) return res.json();
             })
-            .then(data => data)
     }
 }
+
 const auth = new Auth({
     baseUrl: 'https://auth.nomoreparties.co',
 

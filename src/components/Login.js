@@ -3,12 +3,9 @@ import React from "react";
 import Header from "./Header";
 import { Link, Route } from "react-router-dom";
 
-
-
 function Login({ onLogin }) {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
-
 
     const handleSubmit = (e) => {
         e.preventDefault();

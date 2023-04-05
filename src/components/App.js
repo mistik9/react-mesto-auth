@@ -30,26 +30,6 @@ function App() {
 
   const navigate = useNavigate()
 
-  React.useEffect(() => {
-    handleTokenCheck();
-  }, [])
-
-  React.useEffect(() => {
-    console.log()
-    if (!loggedIn) {
-      Promise.all([api.getUserData(), api.getInitialCards()])
-        .then(([userData, cardsData]) => {
-          setCurrentUser(userData)
-          setCards(cardsData)
-        })
-        .catch((err) => {
-          console.log("Ошибочкa с загрузкой")
-        })
-    }
-  }, [])
-
-
-
   //авторизация
   function handleLogin({ email, password }) {
     auth.authorize(email, password)
@@ -108,12 +88,31 @@ function App() {
     }
   }
 
+  React.useEffect(() => {
+    handleTokenCheck();
+  }, [])
+
   //выйти
   function handleLogOut() {
     setLoggedIn(false);
     setUserData({});
     localStorage.removeItem("token")
   }
+
+  //загрузка данных о пользователе и карточек
+  React.useEffect(() => {
+    console.log(loggedIn)
+    if (loggedIn) {
+      Promise.all([api.getUserData(), api.getInitialCards()])
+        .then(([userData, cardsData]) => {
+          setCurrentUser(userData)
+          setCards(cardsData)
+        })
+        .catch((err) => {
+          console.log("Ошибочкa с загрузкой")
+        })
+    }
+  }, [loggedIn])
 
   //открытие попапов
   function handleEditProfileClick() {
